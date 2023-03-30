@@ -1,0 +1,12 @@
+function [delta,a,b,pavg]=finddelta(nu,E,Rax,Rbx,Ray,Rby,Q)
+Rx=Rax*Rbx/(Rax+Rbx);
+Ry=Ray*Rby/(Ray+Rby);
+Rd=Rx*Ry/(Rx+Ry);
+Ed=E/(1-nu^2);
+epsilond=1.0003+0.5968*Rx/Ry;
+zetad=1.5277+0.6023*log(Ry/Rx);
+kd=1.0339*(Ry/Rx)^0.636;
+delta=zetad*((4.5/epsilond*Rd)*(Q/(pi*kd*Ed))^2)^(1/3);
+a=(6*kd^(2)*epsilond*Q*Rd/(pi*Ed))^(1/3);
+b=(6*epsilond*Q*Rd/(pi*kd*Ed))^(1/3);
+pavg=Q/(pi*a*b);
